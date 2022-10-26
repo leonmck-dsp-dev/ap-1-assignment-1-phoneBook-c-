@@ -1,6 +1,0 @@
-# ninja log v5
-0	316	1666738994553558172	CMakeFiles/cms.dir/main.cpp.o	df6f39ead52089aa
-316	346	1666738994585488133	cms	480364e03b84d19
-11	460	1666742319553503383	CMakeFiles/cms.dir/contact_properties.cpp.o	e22eccc623751963
-11	483	1666742319576513442	CMakeFiles/cms.dir/main.cpp.o	df6f39ead52089aa
-11	521	1666742319614379864	CMakeFiles/cms.dir/directory.cpp.o	be7e11cacd6008ba
