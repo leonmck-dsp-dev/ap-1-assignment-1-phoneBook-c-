@@ -4,18 +4,20 @@
 
 #include "directory.h"
 #include <iostream>
+#include <fstream>
 #include <iterator>
 
 directory::directory() {
     file_name = "contacts.txt";
 }
 
-bool directory::add_contact(contact_properties contact) {
+//adds a contact to the directory
+bool directory::add_contact() {
      string firstName;
      string lastName;
      cout << "Enter name: ";
         cin >> firstName >> lastName;
-        contact.set_name(firstName + " " + lastName);
+        contact.set_name (firstName + " " + lastName);
 
      string phone;
         cout << "Enter phone number: ";
@@ -36,7 +38,8 @@ bool directory::add_contact(contact_properties contact) {
     return true;
 }
 
-bool directory::remove_contact(contact_properties contact) {
+//finds a contact to remove
+bool directory::findContactToRemove(string first , string last) {
 
     // itterate through the list
     for (list<contact_properties>::iterator it = contacts.begin(); it != contacts.end(); ++it) {
@@ -49,7 +52,29 @@ bool directory::remove_contact(contact_properties contact) {
     }
     return 0;
 }
-bool directory::search_contact(contact_properties contact) {
+
+//removes a contact from the directory
+bool directory::removeContact() {
+    string firstName;
+    string lastName;
+    cout << "Enter name: ";
+    cin >> firstName >> lastName;
+    contact.set_name (firstName + " " + lastName);
+
+    // if the contact is found
+    if (findContactToRemove(firstName, lastName)) {
+        cout << "Contact removed" << endl;
+        return true;
+    }
+    // if the contact is not found
+    else {
+        cout << "Contact not found" << endl;
+        return false;
+    }
+}
+
+//searches for a contact in the directory
+bool directory::search_contact() {
     // itterate again
     for (list<contact_properties>::iterator it = contacts.begin(); it != contacts.end(); ++it) {
         // if the contact is found
@@ -64,7 +89,8 @@ bool directory::search_contact(contact_properties contact) {
     
 }
 
-bool directory::update_contact(contact_properties contact) {
+//updates a contact in the directory
+bool directory::update_contact() {
     // itterate again
     for (list<contact_properties>::iterator it = contacts.begin(); it != contacts.end(); ++it) {
         // if the contact is found
@@ -98,35 +124,70 @@ bool directory::update_contact(contact_properties contact) {
     
 }
 
+
+//prints the directory
 void directory::print_directory() {
+    // Get contact info from printcontact function
+    printcontact();
+}
+//prints contact information
+bool directory::printcontact() {
     // itterate again
     for (list<contact_properties>::iterator it = contacts.begin(); it != contacts.end(); ++it) {
         // print the contact
-        it->print_contact();
+        it->get_name();
+        it->get_phone();
+        it->get_email();
+        it->get_address();
+        return true;
     }
+    return true;
 }
-
+//writes the directory to a file
 bool directory::write_to_file() {
     // open the file
+    
     ofstream file;
-    file.open(file_name);
-    // itterate again
-    for (list<contact_properties>::iterator it = contacts.begin(); it != contacts.end(); ++it) {
-        // write the contact to the file
-        file << it->get_name() << endl;
-        file << it->get_phone() << endl;
-        file << it->get_email() << endl;
-        file << it->get_address() << endl;
+    
+    
+    file.open("./directory.txt", ios::app);
+    
+    // if the file is not open
+    if (!file.is_open()) {
+        cout << "Error opening file" << endl;
+        return -1;
     }
+    // innitialize variables
+    list<contact_properties>::iterator it;
+    string name, phone, email, address;
+    // IF the file is open
+    if (file.is_open()) {
+        // itterate again
+        for (it = contacts.begin(); it != contacts.end(); ++it) {
+            // get the contact info
+            name = it->get_name();
+            phone = it->get_phone();
+            email = it->get_email();
+            address = it->get_address();
+            // write the contact info to the file
+            file << " " << name << " " << phone << " " << email << " " << address;
+        }
+        // close the file
+        file.close();
+        return true;            
+        
+        
+    }   
     // close the file
     file.close();
     return true;
 }
 
+//reads the directory from a file
 bool directory::read_from_file() {
     // open the file
     ifstream file;
-    file.open(file_name);
+    file.open("../directory.txt");
     // itterate again
     for (list<contact_properties>::iterator it = contacts.begin(); it != contacts.end(); ++it) {
         // read the contact from the file
@@ -148,29 +209,16 @@ bool directory::read_from_file() {
     return true;
 }
 
-bool directory::readcontcts(string firstNames, string lastNames, string phone, string email, string address) {
-    // open the file
-    ifstream file;
-    file.open(file_name);
+//reads a contact from the directory
+bool directory::readcontact() {
     // itterate again
     for (list<contact_properties>::iterator it = contacts.begin(); it != contacts.end(); ++it) {
-        // read the contact from the file
-        string name;
-        string phone;
-        string email;
-        string address;
-        getline(file, name);
-        getline(file, phone);
-        getline(file, email);
-        getline(file, address);
-        it->set_name(name);
-        it->set_phone(phone);
-        it->set_email(email);
-        it->set_address(address);
+        // if the contact is found
+        if (it->get_name() == contact.get_name()) {
+            // read the contact
+            contact = *it;
+            return true;
+        }
     }
-    // close the file
-    file.close();
-    return true;
+    return 0;
 }
-
-

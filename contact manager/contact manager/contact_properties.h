@@ -12,6 +12,13 @@ using namespace std;
 class contact_properties {
 
 public:
+struct contact {
+    string name;
+    string phone;
+    string email;
+    string address;
+};
+  
     contact_properties();
     contact_properties(string name, string phone, string email, string address);
      bool set_name(string name);

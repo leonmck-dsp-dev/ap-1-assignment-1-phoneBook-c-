@@ -31,6 +31,7 @@
 		351466D32908B30700FD1F6D /* contact_properties.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = contact_properties.cpp; sourceTree = "<group>"; };
 		351466D52908B31600FD1F6D /* directory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = directory.cpp; sourceTree = "<group>"; };
 		351466D62908B31600FD1F6D /* directory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = directory.h; sourceTree = "<group>"; };
+		357C4F12290C71F80074CB4E /* directory.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = directory.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +69,7 @@
 				351466D62908B31600FD1F6D /* directory.h */,
 				351466D32908B30700FD1F6D /* contact_properties.cpp */,
 				351466D22908B30700FD1F6D /* contact_properties.h */,
+				357C4F12290C71F80074CB4E /* directory.txt */,
 			);
 			path = "contact manager";
 			sourceTree = "<group>";
